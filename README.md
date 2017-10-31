@@ -7,7 +7,7 @@ What the hell is this thing supposed to do?
 It has Items- a clear Class of its own
   All Items have a sellin value counted in number of days until it must be sold
   All items have a quality
-  Once sellin value reached 0 rate of decline doubles
+  Once selling value reached 0 rate of decline doubles
   Quality cannot be less than 0
 
 Aged Brie - alternative class?

@@ -12,20 +12,6 @@ describe GildedRose do
     let ( :items) { [vest, brie, sulfuras, sulfuras, backstage15, backstage10, backstage5, conjoured] }
     let ( :gilded) { GildedRose.new(items) }
 
-    # What does the test need to do?
-
-    # backstage passes
-    # decrease quality with each update_quality
-    # decrease sell_in with each update_quality
-    # double rate of quality once sell_in < 10
-    # triple rate of quality once sell_in < 5
-
-    # conjoured
-    # decrease quality at twice the rate
-    # decrease sell_in with each update_quality
-    # double rate of quality once sell_in < 10
-    # triple rate of quality once sell_in < 5
-
     # Infrastructure test
 
     it 'does not change the name' do
@@ -94,14 +80,14 @@ describe GildedRose do
       expect { gilded.update_quality }.to change { backstage15.quality }.by(1)
     end
 
-    it 'double the rate quality growth when sell_in is less than 10' do
+    it 'double the rate of quality growth when sell_in is less than 10' do
       5.times do
         gilded.update_quality
       end
       expect { gilded.update_quality }.to change { backstage15.quality }.by(2)
     end
 
-    it 'trebles the rate quality growth when sell_in is less than 10' do
+    it 'trebles the rate of quality growth when sell_in is less than 5' do
       10.times do
         gilded.update_quality
       end

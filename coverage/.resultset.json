@@ -4,7 +4,6 @@
       "/Users/joeingram/projects/week10/gilded-rose-tech-test/spec/gilded_rose_spec.rb": [
         1,
         null,
-        null,
         1,
         1,
         16,
@@ -16,20 +15,6 @@
         16,
         16,
         16,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         null,
         null,
@@ -121,9 +106,11 @@
         null
       ],
       "/Users/joeingram/projects/week10/gilded-rose-tech-test/lib/gilded_rose.rb": [
+        1,
         null,
         1,
         null,
+        1,
         1,
         16,
         null,
@@ -142,13 +129,9 @@
         380,
         289,
         253,
-        223,
-        null,
         null,
         289,
         217,
-        202,
-        null,
         null,
         null,
         null,
@@ -169,13 +152,13 @@
         null,
         null,
         100,
-        70,
         null,
         null,
         null,
         null,
-        null,
-        null,
+        null
+      ],
+      "/Users/joeingram/projects/week10/gilded-rose-tech-test/lib/item.rb": [
         null,
         1,
         1,
@@ -192,6 +175,6 @@
         null
       ]
     },
-    "timestamp": 1509476035
+    "timestamp": 1509483907
   }
 }
