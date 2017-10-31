@@ -68,5 +68,12 @@ describe GildedRose do
     it "increases Brie quality by 1 with each update" do
       expect{gilded.update_quality}.to change{vest.quality}.by(-1)
     end
+
+    it "double the rate of deterioration after sell in reached" do
+      10.times do
+        gilded.update_quality
+      end
+      expect{gilded.update_quality}.to change{vest.quality}.by(-2)
+    end
   end
 end
