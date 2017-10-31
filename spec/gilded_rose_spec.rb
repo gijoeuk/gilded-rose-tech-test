@@ -1,30 +1,18 @@
 require './lib/gilded_rose.rb'
 
-
 describe GildedRose do
-  describe "#update_quality" do
-    let ( :vest) { Item.new(name="+5 Dexterity Vest", sell_in=10, quality=20) }
-    let ( :brie ) { Item.new(name="Aged Brie", sell_in=2, quality=0) }
-    let ( :elixir ) { Item.new(name="Elixir of the Mongoose", sell_in=5, quality=7) }
-    let ( :sulfuras ) { Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=0, quality=80) }
-    let ( :backstage15 ) { Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20) }
-    let ( :backstage10 ) { Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=49) }
-    let ( :backstage5 ) { Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=49) }
-    let ( :conjoured ) { Item.new(name="Conjured Mana Cake", sell_in=3, quality=6) }
-    let ( :items ) {[vest, brie, elixir, sulfuras, backstage15, backstage10, backstage5, conjoured] }
-    let ( :gilded ) { GildedRose.new(items)}
+  describe '#update_quality' do
+    let ( :vest) { Item.new(name = '+5 Dexterity Vest', sell_in = 10, quality = 20) }
+    let ( :brie) { Item.new(name = 'Aged Brie', sell_in = 2, quality = 0) }
+    let ( :sulfuras) { Item.new(name = 'Sulfuras, Hand of Ragnaros', sell_in = 0, quality = 80) }
+    let ( :backstage15) { Item.new(name = 'Backstage passes to a TAFKAL80ETC concert', sell_in = 15, quality = 20) }
+    let ( :backstage10) { Item.new(name = 'Backstage passes to a TAFKAL80ETC concert', sell_in = 10, quality = 49) }
+    let ( :backstage5) { Item.new(name = 'Backstage passes to a TAFKAL80ETC concert', sell_in = 5, quality = 49) }
+    let ( :conjoured) { Item.new(name = 'Conjured Mana Cake', sell_in = 3, quality = 6) }
+    let ( :items) { [vest, brie, sulfuras, sulfuras, backstage15, backstage10, backstage5, conjoured] }
+    let ( :gilded) { GildedRose.new(items) }
 
     # What does the test need to do?
-
-    # Elixir of the mongoose
-    # decrease quality with each update_quality
-    # decrease sell_in with each update_quality
-    # double rate of decline once sell_in = 0
-
-    # +5 sulfuras
-    # doesn't change quality with each update_quality
-    # decrease sell_in with each update_quality
-    # double rate of decline once sell_in = 0
 
     # backstage passes
     # decrease quality with each update_quality
@@ -38,74 +26,91 @@ describe GildedRose do
     # double rate of quality once sell_in < 10
     # triple rate of quality once sell_in < 5
 
-# Infrastructure test
+    # Infrastructure test
 
-    it "does not change the name" do
-      items = [Item.new("foo", 0, 0)]
-      GildedRose.new(items).update_quality()
-      expect(items[0].name).to eq "foo"
+    it 'does not change the name' do
+      items = [Item.new('foo', 0, 0)]
+      GildedRose.new(items).update_quality
+      expect(items[0].name).to eq 'foo'
     end
 
-# Brie
-    it "reduces Brie sell_in by 1 with each update" do
-      expect{gilded.update_quality}.to change{brie.sell_in}.by(-1)
+    # Brie
+    it 'reduces Brie sell_in by 1 with each update' do
+      expect { gilded.update_quality }.to change { brie.sell_in }.by(-1)
     end
 
-    it "increases Brie quality by 1 with each update" do
-      expect{gilded.update_quality}.to change{brie.quality}.by(1)
+    it 'increases Brie quality by 1 with each update' do
+      expect { gilded.update_quality }.to change { brie.quality }.by(1)
     end
 
-    it "cannot pass upper limit for quality" do
+    it 'cannot pass upper limit for quality' do
       50.times do
         gilded.update_quality
       end
-      expect{gilded.update_quality}.not_to change{brie.quality}
+      expect { gilded.update_quality }.not_to change { brie.quality }
     end
 
-# Vest
-    it "reduces Vest sell_in by 1 with each update" do
-      expect{gilded.update_quality}.to change{vest.sell_in}.by(-1)
+    # Vest
+    it 'reduces Vest sell_in by 1 with each update' do
+      expect { gilded.update_quality }.to change { vest.sell_in }.by(-1)
     end
 
-    it "increases Vest quality by 1 with each update" do
-      expect{gilded.update_quality}.to change{vest.quality}.by(-1)
+    it 'increases Vest quality by 1 with each update' do
+      expect { gilded.update_quality }.to change { vest.quality }.by(-1)
     end
 
-    it "double the rate of deterioration after sell in reached" do
+    it 'double the rate of deterioration after sell in reached' do
       10.times do
         gilded.update_quality
       end
-      expect{gilded.update_quality}.to change{vest.quality}.by(-2)
+      expect { gilded.update_quality }.to change { vest.quality }.by(-2)
     end
 
-    it "cannot pass upper limit for quality" do
+    it 'cannot pass upper limit for quality' do
       30.times do
         gilded.update_quality
       end
-      expect{gilded.update_quality}.not_to change{vest.quality}
+      expect { gilded.update_quality }.not_to change { vest.quality }
     end
 
-# Elixir
-    it "reduces elixir sell_in by 1 with each update" do
-      expect{gilded.update_quality}.to change{elixir.sell_in}.by(-1)
+    # Sulfuras
+    it 'sell_in does not change with update_quality' do
+      expect { gilded.update_quality }.not_to change { sulfuras.sell_in }
     end
 
-    it "increases elixir quality by 1 with each update" do
-      expect{gilded.update_quality}.to change{elixir.quality}.by(-1)
+    it 'quality does not change with update_quality' do
+      expect { gilded.update_quality }.not_to change { sulfuras.quality }
     end
 
-    it "double the rate of deterioration after sell in reached" do
+    it 'cannot change upper limit for quality' do
+      expect { gilded.update_quality }.not_to change { sulfuras.quality }
+    end
+    # Backstage passes
+    it 'reduces sell_in by 1 with each update' do
+      expect { gilded.update_quality }.to change { backstage15.sell_in }.by(-1)
+    end
+
+    it 'increases quality by 1 with each update' do
+      expect { gilded.update_quality }.to change { backstage15.quality }.by(1)
+    end
+
+    it 'double the rate quality growth when sell_in is less than 10' do
       5.times do
         gilded.update_quality
       end
-      expect{gilded.update_quality}.to change{elixir.quality}.by(-2)
+      expect { gilded.update_quality }.to change { backstage15.quality }.by(2)
     end
 
-    it "cannot pass upper limit for quality" do
-      43.times do
+    it 'trebles the rate quality growth when sell_in is less than 10' do
+      10.times do
         gilded.update_quality
       end
-      expect{gilded.update_quality}.not_to change{elixir.quality}
+      expect { gilded.update_quality }.to change { backstage15.quality }.by(3)
+    end
+
+    it 'cannot pass upper limit for quality' do
+      gilded.update_quality
+      expect { gilded.update_quality }.not_to change { backstage5.quality }
     end
   end
 end
