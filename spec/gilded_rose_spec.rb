@@ -16,10 +16,6 @@ describe GildedRose do
 
     # What does the test need to do?
 
-    # AgedBrie
-    # increase quality with each update_quality
-    # decrease sell_in with each update_quality
-
     # +5 Dexterity Vest
     # decrease quality with each update_quality
     # decrease sell_in with each update_quality
@@ -62,6 +58,15 @@ describe GildedRose do
 
     it "increases Brie quality by 1 with each update" do
       expect{gilded.update_quality}.to change{brie.quality}.by(1)
+    end
+
+# Vest
+    it "reduces Vest sell_in by 1 with each update" do
+      expect{gilded.update_quality}.to change{vest.sell_in}.by(-1)
+    end
+
+    it "increases Brie quality by 1 with each update" do
+      expect{gilded.update_quality}.to change{vest.quality}.by(-1)
     end
   end
 end
