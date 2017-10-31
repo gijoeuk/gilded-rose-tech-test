@@ -21,6 +21,7 @@ describe GildedRose do
     end
 
     # Brie
+
     it 'reduces Brie sell_in by 1 with each update' do
       expect { gilded.update_quality }.to change { brie.sell_in }.by(-1)
     end
