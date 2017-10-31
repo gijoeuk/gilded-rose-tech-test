@@ -32,4 +32,4 @@ somewhere
 
 Where do all of these items start to countdown/up from?
 
-Write the test suit first, then refactor
+Write the test suite first, then refactor
