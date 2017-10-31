@@ -6,8 +6,10 @@ describe AgedBrie do
     it 'should be an instance of agedbrie class' do
       expect(brie).to be_an_instance_of(AgedBrie)
     end
-  #   it 'starts with a default quality of x' do
-  #
+    it 'starts with a default quality of 0' do
+       expect(brie.quality).to eq(0)
+    end
+
   #   it 'does not allow quality to go beyond 50' do
   #
   #   it 'raises the quality score by 1 each time method is called' do
