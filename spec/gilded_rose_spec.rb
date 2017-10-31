@@ -16,11 +16,6 @@ describe GildedRose do
 
     # What does the test need to do?
 
-    # +5 Dexterity Vest
-    # decrease quality with each update_quality
-    # decrease sell_in with each update_quality
-    # double rate of decline once sell_in = 0
-
     # Elixir of the mongoose
     # decrease quality with each update_quality
     # decrease sell_in with each update_quality
@@ -72,7 +67,7 @@ describe GildedRose do
       expect{gilded.update_quality}.to change{vest.sell_in}.by(-1)
     end
 
-    it "increases Brie quality by 1 with each update" do
+    it "increases Vest quality by 1 with each update" do
       expect{gilded.update_quality}.to change{vest.quality}.by(-1)
     end
 
@@ -84,10 +79,33 @@ describe GildedRose do
     end
 
     it "cannot pass upper limit for quality" do
-      50.times do
+      30.times do
         gilded.update_quality
       end
       expect{gilded.update_quality}.not_to change{vest.quality}
+    end
+
+# Elixir
+    it "reduces elixir sell_in by 1 with each update" do
+      expect{gilded.update_quality}.to change{elixir.sell_in}.by(-1)
+    end
+
+    it "increases elixir quality by 1 with each update" do
+      expect{gilded.update_quality}.to change{elixir.quality}.by(-1)
+    end
+
+    it "double the rate of deterioration after sell in reached" do
+      5.times do
+        gilded.update_quality
+      end
+      expect{gilded.update_quality}.to change{elixir.quality}.by(-2)
+    end
+
+    it "cannot pass upper limit for quality" do
+      43.times do
+        gilded.update_quality
+      end
+      expect{gilded.update_quality}.not_to change{elixir.quality}
     end
   end
 end
