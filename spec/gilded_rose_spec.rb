@@ -60,6 +60,13 @@ describe GildedRose do
       expect{gilded.update_quality}.to change{brie.quality}.by(1)
     end
 
+    it "cannot pass upper limit for quality" do
+      50.times do
+        gilded.update_quality
+      end
+      expect{gilded.update_quality}.not_to change{brie.quality}
+    end
+
 # Vest
     it "reduces Vest sell_in by 1 with each update" do
       expect{gilded.update_quality}.to change{vest.sell_in}.by(-1)
@@ -74,6 +81,13 @@ describe GildedRose do
         gilded.update_quality
       end
       expect{gilded.update_quality}.to change{vest.quality}.by(-2)
+    end
+
+    it "cannot pass upper limit for quality" do
+      50.times do
+        gilded.update_quality
+      end
+      expect{gilded.update_quality}.not_to change{vest.quality}
     end
   end
 end
