@@ -31,3 +31,10 @@ Normal needs to be in here
 somewhere
 
 Where do all of these items start to countdown/up from?
+
+So what is it doing
+Each time we call update quality on items (daily) it amends the quality and sellin of each item, based on what that item is
+
+Each item has its own qualities and rated of deterioration. Makes sense then that they become objects in their own right.
+
+Each item needs to know what it is and carry state relating to its age and quality
