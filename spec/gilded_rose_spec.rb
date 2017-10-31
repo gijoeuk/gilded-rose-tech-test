@@ -11,6 +11,8 @@ describe GildedRose do
     let ( :backstage10 ) { Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=49) }
     let ( :backstage5 ) { Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=49) }
     let ( :conjoured ) { Item.new(name="Conjured Mana Cake", sell_in=3, quality=6) }
+    let ( :items ) {[vest, brie, elixir, sulfuras, backstage15, backstage10, backstage5, conjoured] }
+    let ( :gilded ) { GildedRose.new(items)}
 
     # What does the test need to do?
 
@@ -45,6 +47,7 @@ describe GildedRose do
     # double rate of quality once sell_in < 10
     # triple rate of quality once sell_in < 5
 
+# Infrastructure test
 
     it "does not change the name" do
       items = [Item.new("foo", 0, 0)]
@@ -52,10 +55,10 @@ describe GildedRose do
       expect(items[0].name).to eq "foo"
     end
 
-    it "has a method to change sellin by 1" do
-      items = [Item.new("Aged Brie", 2, 0)]
-      gildedrose = GildedRose.new(items)
-      expect(gildedrose.update_quality).to change{.sell_in}.by(1)
+# Brie
+    it "reduces Brie sell_in by 1 with each update" do
+      p items
+      expect{gilded.update_quality}.to change{brie.sell_in}.by(-1)
     end
   end
 end
