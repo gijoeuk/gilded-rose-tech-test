@@ -57,8 +57,11 @@ describe GildedRose do
 
 # Brie
     it "reduces Brie sell_in by 1 with each update" do
-      p items
       expect{gilded.update_quality}.to change{brie.sell_in}.by(-1)
+    end
+
+    it "increases Brie quality by 1 with each update" do
+      expect{gilded.update_quality}.to change{brie.quality}.by(1)
     end
   end
 end
