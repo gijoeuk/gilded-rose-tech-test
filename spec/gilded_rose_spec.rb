@@ -9,7 +9,7 @@ describe GildedRose do
     let ( :backstage10) { Item.new(name = 'Backstage passes to a TAFKAL80ETC concert', sell_in = 10, quality = 49) }
     let ( :backstage5) { Item.new(name = 'Backstage passes to a TAFKAL80ETC concert', sell_in = 5, quality = 49) }
     let ( :conjoured) { Item.new(name = 'Conjured Mana Cake', sell_in = 3, quality = 6) }
-    let ( :items) { [vest, brie, sulfuras, sulfuras, backstage15, backstage10, backstage5, conjoured] }
+    let ( :items) { [vest, brie, sulfuras, backstage15, backstage10, backstage5, conjoured] }
     let ( :gilded) { GildedRose.new(items) }
 
     # Infrastructure test
@@ -23,6 +23,7 @@ describe GildedRose do
     # Brie
 
     it 'reduces Brie sell_in by 1 with each update' do
+      p brie
       expect { gilded.update_quality }.to change { brie.sell_in }.by(-1)
     end
 
@@ -51,13 +52,6 @@ describe GildedRose do
         gilded.update_quality
       end
       expect { gilded.update_quality }.to change { vest.quality }.by(-2)
-    end
-
-    it 'cannot pass upper limit for quality' do
-      30.times do
-        gilded.update_quality
-      end
-      expect { gilded.update_quality }.not_to change { vest.quality }
     end
 
     # Sulfuras
@@ -98,6 +92,22 @@ describe GildedRose do
     it 'cannot pass upper limit for quality' do
       gilded.update_quality
       expect { gilded.update_quality }.not_to change { backstage5.quality }
+    end
+
+    # Conjoured
+    it 'reduces Conjoured sell_in by 1 with each update' do
+      expect { gilded.update_quality }.to change { conjoured.sell_in }.by(-1)
+    end
+
+    it 'increases Conjoured quality by 2 with each update' do
+      expect { gilded.update_quality }.to change { conjoured.quality }.by(-2)
+    end
+
+    it 'double the rate of deterioration after sell in reached' do
+      3.times do
+        gilded.update_quality
+      end
+      expect { gilded.update_quality }.to change { conjoured.quality }.by(-4)
     end
   end
 end
