@@ -40,10 +40,11 @@ describe GildedRose do
 
     # Vest
     it 'reduces Vest sell_in by 1 with each update' do
+      p vest
       expect { gilded.update_quality }.to change { vest.sell_in }.by(-1)
     end
 
-    it 'increases Vest quality by 1 with each update' do
+    it 'reduces Vest quality by 1 with each update' do
       expect { gilded.update_quality }.to change { vest.quality }.by(-1)
     end
 
@@ -66,6 +67,7 @@ describe GildedRose do
     it 'cannot change upper limit for quality' do
       expect { gilded.update_quality }.not_to change { sulfuras.quality }
     end
+
     # Backstage passes
     it 'reduces sell_in by 1 with each update' do
       expect { gilded.update_quality }.to change { backstage15.sell_in }.by(-1)

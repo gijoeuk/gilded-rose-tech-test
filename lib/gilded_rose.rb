@@ -10,15 +10,16 @@ class GildedRose
     @items.each do |item|
       if item.name == "Aged Brie"
         update_brie(item)
-      elsif item == "Vest"
-        update_sulfuras(item)
-      elsif item == "Backstage passes to a TAFKAL80ETC concert"
+      elsif item.name == "+5 Dexterity Vest"
+        update_vest(item)
+      elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         update_backstage(item)
-      elsif
+      elsif item.name == "Conjured Mana Cake"
         update_conjoured(item)
       end
     end
   end
+
 
   def update_brie(item)
     update_sell_in(item)
@@ -27,7 +28,7 @@ class GildedRose
 
   def update_vest(item)
     update_sell_in(item)
-    item.quality > 0 ? item.quality -= 1 : return
+    item.quality > 0 && item.quality < 50 ? item.quality -= 1 : return
   end
 
   def update_sulfuras(item)
@@ -36,11 +37,11 @@ class GildedRose
 
   def update_backstage(item)
     update_sell_in(item)
-    if item.sell_in < 5
+    if item.sell_in < 5 && item.quality < 48
       item.quality += 3
-    elsif item.sell_in < 10
+    elsif item.sell_in < 10 && item.quality < 49
       item.quality += 2
-    elsif item.sell_in < 50
+    elsif item.quality < 50
       item.quality += 1
     else
       return
@@ -52,10 +53,7 @@ class GildedRose
   end
 
   def update_sell_in(item)
-    if item.sell_in > 0
-      item.sell_in -= 1
-    end
-    return
+    item.sell_in -= 1
   end
 end
 #
