@@ -23,7 +23,6 @@ describe GildedRose do
     # Brie
 
     it 'reduces Brie sell_in by 1 with each update' do
-      p brie
       expect { gilded.update_quality }.to change { brie.sell_in }.by(-1)
     end
 
@@ -40,7 +39,6 @@ describe GildedRose do
 
     # Vest
     it 'reduces Vest sell_in by 1 with each update' do
-      p vest
       expect { gilded.update_quality }.to change { vest.sell_in }.by(-1)
     end
 

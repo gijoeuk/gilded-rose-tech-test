@@ -28,7 +28,8 @@ class GildedRose
 
   def update_vest(item)
     update_sell_in(item)
-    item.quality > 0 && item.quality < 50 ? item.quality -= 1 : return
+    item.quality -= 1 if item.quality > 0 && item.quality < 50
+    item.quality -= 1 if item.sell_in < 0 
   end
 
   def update_sulfuras(item)
