@@ -21,16 +21,12 @@ class GildedRose
   end
 
   def update_brie(item)
-    if item.sell_in > 0
-      item.sell_in -= 1
-    end
+    update_sell_in(item)
     item.quality < 50 ? item.quality += 1 : return
   end
 
   def update_vest(item)
-    if item.sell_in > 0
-      item.sell_in -= 1
-    end
+    update_sell_in(item)
     item.quality > 0 ? item.quality -= 1 : return
   end
 
@@ -39,19 +35,27 @@ class GildedRose
   end
 
   def update_backstage(item)
-    if @sell_in > 0 && @sell_in < 5
-      @sell_in -= 1
-      @quality += 3
-    elsif @sell_in > 0 && @sell_in <10
-      @quality += 2
-      @sell_in -= 1
-    elsif @sell_in > 0 && @sell_in >= 10
-      @quality += 1
-      @sell_in -= 1
+    update_sell_in(item)
+    if item.sell_in < 5
+      item.quality += 3
+    elsif item.sell_in < 10
+      item.quality += 2
+    elsif item.sell_in < 50
+      item.quality += 1
+    else
+      return
     end
   end
 
   def update_conjoured(item)
+    update_sell_in(item)
+  end
+
+  def update_sell_in(item)
+    if item.sell_in > 0
+      item.sell_in -= 1
+    end
+    return
   end
 end
 #
