@@ -20,6 +20,7 @@ class GildedRose
     end
   end
 
+  private
 
   def update_brie(item)
     update_sell_in(item)
@@ -28,8 +29,8 @@ class GildedRose
 
   def update_vest(item)
     update_sell_in(item)
-    item.quality -= 1 if item.quality > 0 && item.quality < 50
-    item.quality -= 1 if item.sell_in < 0
+    quality_down1(item) if item.quality > 0 && item.quality < 50
+    quality_down1(item) if item.sell_in < 0
   end
 
   def update_sulfuras(item)
@@ -38,18 +39,29 @@ class GildedRose
 
   def update_backstage(item)
     update_sell_in(item)
-    item.quality += 1 if item.quality < 50
-    item.quality += 1 if item.sell_in < 10 && item.quality < 50
-    item.quality += 1 if item.sell_in < 5 && item.quality < 50
+    quality_up1(item) if item.quality < 50
+    quality_up1(item) if item.sell_in < 10 && item.quality < 50
+    quality_up1(item) if item.sell_in < 5 && item.quality < 50
   end
 
   def update_conjoured(item)
     update_sell_in(item)
-    item.quality -= 2 if item.quality > 0 && item.quality < 50
-    item.quality -= 2 if item.sell_in < 0
+    quality_down2(item) if item.quality > 0 && item.quality < 50
   end
 
   def update_sell_in(item)
     item.sell_in -= 1
+  end
+
+  def quality_down1(item)
+    item.quality -= 1
+  end
+
+  def quality_down2(item)
+    item.quality -= 2
+  end
+
+  def quality_up1(item)
+    item.quality += 1
   end
 end
