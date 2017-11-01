@@ -2,34 +2,56 @@
 
 Gilded Rose Kate- Tech Test week 10
 
-What the hell is this thing supposed to do?
+User stories
+--------------
+As a shop owner,
+so that I can keep track of my stock,
+I want to be able to add stock items to my system
 
-It has Items- a clear Class of its own
-  All Items have a sellin value counted in number of days until it must be sold
-  All items have a quality
-  Once selling value reached 0 rate of decline doubles
-  Quality cannot be less than 0
+As a shop owner
+so that I can manage my produce
+I want my programme to recognise produce and know its rate of decay
 
-Aged Brie - alternative class?
-  Quality improves with Age
-  Quality cannot be higher than 50
+As a shop owner
+so that I can manage my produce
+I want my programme to recognise produce and know its rate of maturing
 
-Sulfuras - alternative class?
-  Never declines in quality
+As a shop owner
+so that I can manage my produce
+I want my programme to recognise produce and manage it's sell by date
 
-Backstage Passes - Alternative class?
-  Similar to aged Brie quality increases as you approach sellin
-  Quality improves 2 fold with less than 10 days to go
-  Quality improves 3 fold with less than 5 days to go
+As a shop owner
+so that I can keep on top of quality
+I want my programme to monitor the decline in quality of my produce
 
-Conjoured
-  Quality declined at twice the normal rate
+As a shop owner
+so that I can keep on top of quality
+I want my programme to monitor the improvement in quality of my produce
 
-Normal rate....
-What is normal?
-Normal needs to be in here
-somewhere
+As a shop owner
+so that I can update produce daily
+I want to update all produce at once
 
-Where do all of these items start to countdown/up from?
+Instructions;
+-------------
 
-Write the test suite first, then refactor
+To use this programme you will firstly need to open IRB in the command line and require './lib/gilded_rose.rb'
+
+You can generate a new item using the command 'item = Item.new("itemname", sell_in as integer, quality as integer)'. Create as many as you want and add to an array.
+
+Create a new instance of gilded rose using 'gildedrose = GildedRose.new(items)'. Be sure to pass in your item as an argument.
+
+Your Item has now been passed into Gilded rose.
+
+Use the command 'gilded_rose.update_quality' on a daily basis to update the quality and sell_in of your item.
+
+Tech
+-----------
+Ruby gems
+
+gem 'rspec'
+gem 'rubocop'
+gem 'simplecov', require: false, group: :test
+gem 'simplecov-console', require: false, group: :test
+
+Test with RSpec from the command line
