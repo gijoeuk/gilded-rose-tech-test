@@ -102,12 +102,5 @@ describe GildedRose do
     it 'increases Conjoured quality by 2 with each update' do
       expect { gilded.update_quality }.to change { conjoured.quality }.by(-2)
     end
-
-    it 'double the rate of deterioration after sell in reached' do
-      3.times do
-        gilded.update_quality
-      end
-      expect { gilded.update_quality }.to change { conjoured.quality }.by(-4)
-    end
   end
 end
