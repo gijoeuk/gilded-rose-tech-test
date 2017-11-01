@@ -11,11 +11,11 @@ class GildedRose
       if item.name == "Aged Brie"
         update_brie(item)
       elsif item == "Vest"
-        update_sulfuras
+        update_sulfuras(item)
       elsif item == "Backstage passes to a TAFKAL80ETC concert"
-        update_backstage
-      else
-        update_conjoured
+        update_backstage(item)
+      elsif
+        update_conjoured(item)
       end
     end
   end
@@ -24,19 +24,21 @@ class GildedRose
     if item.sell_in > 0
       item.sell_in -= 1
     end
-    item.quality <= 50 ? item.quality += 1 : return
+    item.quality < 50 ? item.quality += 1 : return
   end
 
-  def update_vest
-    @quality <= 50 ? @quality += 1 : return
-    @sell_in > 0 ? @sell_in -= 1 : return
+  def update_vest(item)
+    if item.sell_in > 0
+      item.sell_in -= 1
+    end
+    item.quality > 0 ? item.quality -= 1 : return
   end
 
-  def update_sulfuras
+  def update_sulfuras(item)
 
   end
 
-  def update_backstage
+  def update_backstage(item)
     if @sell_in > 0 && @sell_in < 5
       @sell_in -= 1
       @quality += 3
@@ -49,7 +51,7 @@ class GildedRose
     end
   end
 
-  def update_conjoured
+  def update_conjoured(item)
   end
 end
 #
